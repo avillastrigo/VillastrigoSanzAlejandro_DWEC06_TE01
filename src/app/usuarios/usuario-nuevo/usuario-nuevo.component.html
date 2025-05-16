@@ -1,0 +1,51 @@
+<h2>Crear Usuario</h2>
+<form  class="formulario-usuario" #form="ngForm" (ngSubmit)="crearUsuario()" novalidate>
+
+  <label for="nombre">Nombre:</label>
+  <input
+    type="text"
+    id="nombre"
+    name="nombre"
+    [(ngModel)]="usuario.nombre"
+    required
+    minlength="3"
+    #nombre="ngModel"
+  />
+  <div *ngIf="nombre.invalid && nombre.touched" class="error">
+    El nombre es obligatorio y debe tener al menos 3 caracteres.
+  </div>
+
+  <label for="email">Email:</label>
+  <input
+    type="email"
+    id="email"
+    name="email"
+    [(ngModel)]="usuario.email"
+    required
+    email
+    #email="ngModel"
+  />
+  <div *ngIf="email.invalid && email.touched" class="error">
+    Introduce un email válido.
+  </div>
+
+  <label for="edad">Edad:</label>
+  <input
+    type="number"
+    id="edad"
+    name="edad"
+    [(ngModel)]="usuario.edad"
+    required
+    min="18"
+    max="100"
+    #edad="ngModel"
+  />
+  <div *ngIf="edad.invalid && edad.touched" class="error">
+    Introduce una edad válida (entre 18 y 100).
+  </div>
+
+  <label for="activo">Activo:</label>
+  <input type="checkbox" id="activo" [(ngModel)]="usuario.activo" name="activo" />
+
+  <button type="submit" [disabled]="form.invalid">Crear Usuario</button>
+</form>

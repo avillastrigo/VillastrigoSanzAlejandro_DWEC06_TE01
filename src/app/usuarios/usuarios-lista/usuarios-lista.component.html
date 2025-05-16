@@ -1,0 +1,35 @@
+<h2>Lista de Usuarios</h2>
+
+<div class="estadisticas">
+  <p><strong>Usuarios activos:</strong> {{ totalActivos }}</p>
+  <p><strong>Media de edad:</strong> {{ mediaEdad }}</p>
+</div>
+
+<div class="usuarios-grid">
+  <div class="usuario-card" *ngFor="let usuario of usuarios">
+    <a [routerLink]="['/usuarios', usuario.id]" class="nombre-link">
+      <h3>{{ usuario.nombre }}</h3>
+    </a>
+    <p><strong>Email:</strong> {{ usuario.email }}</p>
+    <p><strong>Edad:</strong> {{ usuario.edad }}</p>
+    <p><strong>Activo:</strong> 
+       <span [ngClass]="usuario.activo ? 'punto-activo' : 'punto-inactivo'">
+          ● {{ usuario.activo ? '' : '' }}
+       </span>
+    </p>
+
+    <div class="acciones">
+      <button (click)="eliminarUsuario(usuario.id)">Eliminar</button>
+      <a [routerLink]="['/usuarios/editar', usuario.id]">
+        <button>Editar</button>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Botón para crear nuevo usuario -->
+<div style="text-align: center; margin-top: 2rem;">
+  <a [routerLink]="['/usuarios/nuevo']">
+    <button>Crear nuevo usuario</button>
+  </a>
+</div>
